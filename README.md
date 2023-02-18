@@ -1,7 +1,12 @@
 # Slimme Baken voor PoAB
 
 ## LoRaWan communicatie
+
 ### Wat is LoRaWan
+LoRaWan is een protocol dat is ontworpen voor weinig verbuik en een groot bereik. LoRa staat voor "Long Range Radio" en is bedoeld voor IoT devices. Het kan draadloos communiceren met batterij gestuurde "things". Het wordt meestal gebruikt in toepassingen van IoT, het kan in beide richtingen communiceren.
+
+![LoRaWan example digikey](https://www.digikey.be/-/media/MakerIO/Images/blogs/introduction-to-lora-technology/introduction-to-lora-technology-figure-1.jpg?ts=21c2c3bb-0661-415b-b58e-c4f12837e104)
+
 ### The things network
 Voor ons project op te bouwen gaan we gebruik maken van "the things network". Deze organisatie heeft een aantal gateways geplaats die openbaar gebruikt kunnen worden na registratie. Ze hebben ook een "heatmap" waarop er gezien kan worden waar de gateways zijn en/of er verbinding is op bepaalde plaatsen.
 
@@ -62,7 +67,8 @@ Schema verduidelijking:
 
 ### Data Node-red -> µC
 ToDo
-[Npde-RED LoRaWan](https://www.thethingsindustries.com/docs/integrations/node-red/)
+
+[Node-RED LoRaWan](https://www.thethingsindustries.com/docs/integrations/node-red/)
 
 [Datasheet RN2483 LoRaWan chip](https://ww1.microchip.com/downloads/en/DeviceDoc/50002346C.pdf)
 
