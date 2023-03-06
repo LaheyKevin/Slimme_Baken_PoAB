@@ -97,13 +97,16 @@ Binnen LoRaWan bestaan er verschillende klassen. Elke klassen heeft verschillend
 
 1. Klasse A
     - Enkel de end devices kunnen berichten initiëren over het netwerk. Nadat een end device een uplink bericht heeft verzonden worden er 2 recieve windows geopend waarop het end device kan ontvangen.
-    [Klasse A](https://www.thethingsnetwork.org/docs/lorawan/classes/class-a.png)
+    
+    ![Klasse A](https://www.thethingsnetwork.org/docs/lorawan/classes/class-a.png)
 2. Klasse B
     - Klasse B heeft de zelfde functionaliteiten als klasse A. Ook is het mogelijk om bij klasse B beacons in te stellen via de gateway. Deze gateway zal dan om de zoveel tijd een signaal sturen naar het end device wat hierop een recieve window opent.
-    [Klasse B](https://www.thethingsnetwork.org/docs/lorawan/classes/class-b.png)
+    
+    ![Klasse B](https://www.thethingsnetwork.org/docs/lorawan/classes/class-b.png)
 3. Klasse C
     - Klasse C is een verdere versie van klasse A doordat de recieve windows open blijven. Hierdoor is het mogelijk om naar het end device te sturen
-    [Klasse C](https://www.thethingsnetwork.org/docs/lorawan/classes/class-c.png)
+    
+    ![Klasse C](https://www.thethingsnetwork.org/docs/lorawan/classes/class-c.png)
 Klasse A = 0.025A
 Klasse C = 0.036A
 
