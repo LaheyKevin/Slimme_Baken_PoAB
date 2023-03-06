@@ -29,7 +29,7 @@ We gaan hier verbinding opzetten tussen de microcontroller en "the things networ
 5. Hierna kan je alle andere keys automatisch generen
 
 **Connecteren**
-1. Upload het voorbeeldprogramm in de (ESP32/MKR WAN 1300)
+1. Upload het voorbeeldprogramm in de (MKR WAN 1300)
 2. Pas in het programma volgende details aan naar je eigen waarden:
     - devAddr
     - nwkSkey
@@ -66,7 +66,33 @@ Schema verduidelijking:
 ![Node-RED debug vb](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/Node_red_debug.JPG)
 
 ### Data Node-red -> µC
-ToDo
+Hiervoor zal de data vanaf node-red naar de microcontroller worden gestuurd. Dit zal gebeuren via een mqtt blok in node-red applicatie. je moet de juiste properties instellen die overeen komen met de ttn pagina.
+
+![Node-RED applicatie](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/Node_red_app_send.JPG)
+
+Schema verduidelijking:
+- De paarse blok is de ontvanger "mqqt out"
+- De groene blok laat data zien in het "debug" venster
+- De gele blok zet data om naar een downlink Object
+- De blauwe blokken zijn knoppen die data doorgeven
+
+![Node-RED applicatie](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/Node_red_app_send_debug.JPG)
+
+### LoRaWan data analyze
+Voor het verzenden van data over het LoRaWan netwerk is het de bedoeling dat deze berichten zo klein mogelijk zijn. In de code van het project stuur je zogezegd een string door, maar deze wordt geconverteerd naar bytes. Hierdoor moeten we aan de kant van ttn een payload formatter toevoegen die dit terug omzet. Ook hoe groter de string die we sturen hoe langer de "uplink" tijd zal zijn. Hierdoor hebben wij volgende keuzes gemaakt omtrent onze data.
+
+- Berichten opdelen in 3 delen vanaf de microcontroller
+    - Device id
+        - Bevat het id van de device. We sturen dit mee wanneer de microcontroller opstart zodat deze kan worden toegevoegd in een databank aan de ontvanger.
+    - Lamp data
+        - Bevat of de lampen aan of uit zijn.
+        - Bevat foutmeldingen vanuit de baken.
+    - GPS locatie
+        - De locatie waar de baken zich bevindt moet maar 1 keer worden doorgestuurd zodat er geen overload is.
+
+### LoRaWan klassen analyze
+Klasse A = 0.025A
+Klasse C = 0.036A
 
 [Node-RED LoRaWan](https://www.thethingsindustries.com/docs/integrations/node-red/)
 
