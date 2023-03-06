@@ -23,7 +23,7 @@ We gaan hier verbinding opzetten tussen de microcontroller en "the things networ
 **Aanmaken device**
 1. Ga naar applications op de website van ttn
 2. Klik op "end devices" en/of "register end device"
-3. Vul de volgende instelling in: (momenteel gebruik ik de ESP32 + RN2483 later zal dit aangepast worden)
+3. Vul de volgende instelling in:
 ![TheThingsNetwork device setup](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/TheThingsNetwork_device_setup.JPG)
 4. Bij "JoinEUI" kan je de waarden invullen die de seriële monitor print bij het uploaden van de voorbeeld code
 5. Hierna kan je alle andere keys automatisch generen
