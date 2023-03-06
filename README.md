@@ -90,13 +90,25 @@ Voor het verzenden van data over het LoRaWan netwerk is het de bedoeling dat dez
     - GPS locatie
         - De locatie waar de baken zich bevindt moet maar 1 keer worden doorgestuurd zodat er geen overload is.
 
+Alle berichten die worden verzonden vanaf de microcontroller worden vooraf gegaan met een identiefier. Hierdoor kan er een onderscheid worden gemaakt tussen de 3 soorten berichten.
+
 ### LoRaWan klassen analyze
+Binnen LoRaWan bestaan er verschillende klassen. Elke klassen heeft verschillende voordelen en nadelen, we overlopen de 3 klassen hieronder.
+
+1. Klasse A
+    - Enkel de end devices kunnen berichten initiëren over het netwerk. Nadat een end device een uplink bericht heeft verzonden worden er 2 recieve windows geopend waarop het end device kan ontvangen.
+    [Klasse A](https://www.thethingsnetwork.org/docs/lorawan/classes/class-a.png)
+2. Klasse B
+    - Klasse B heeft de zelfde functionaliteiten als klasse A. Ook is het mogelijk om bij klasse B beacons in te stellen via de gateway. Deze gateway zal dan om de zoveel tijd een signaal sturen naar het end device wat hierop een recieve window opent.
+    [Klasse B](https://www.thethingsnetwork.org/docs/lorawan/classes/class-b.png)
+3. Klasse C
+    - Klasse C is een verdere versie van klasse A doordat de recieve windows open blijven. Hierdoor is het mogelijk om naar het end device te sturen
+    [Klasse C](https://www.thethingsnetwork.org/docs/lorawan/classes/class-c.png)
 Klasse A = 0.025A
 Klasse C = 0.036A
 
-[Node-RED LoRaWan](https://www.thethingsindustries.com/docs/integrations/node-red/)
+[TTN klassen](https://www.thethingsnetwork.org/docs/lorawan/classes/)
 
-[Datasheet RN2483 LoRaWan chip](https://ww1.microchip.com/downloads/en/DeviceDoc/50002346C.pdf)
 
 ## Bestellijst
 In onderstaande lijst zijn alle componeten opgelijst die we nodig hebben voor de uitwerking van dit project. (V1 = enkel componenten die nodig zijn om de werking verder te onderzoeken, geen mechanische comonenten. Batterij kan worden besteld vanaf dat er een stroom analyze is gemaakt.) 
@@ -109,5 +121,7 @@ In onderstaande lijst zijn alle componeten opgelijst die we nodig hebben voor de
 [ArduinoCore-samd](https://github.com/DaanDekoningKrekels/ArduinoCore-samd)
 
 [The things network docs](https://www.thethingsindustries.com/docs/)
+
+[Node-RED LoRaWan](https://www.thethingsindustries.com/docs/integrations/node-red/)
 
 [Markdown guide](https://www.markdownguide.org/cheat-sheet/)
