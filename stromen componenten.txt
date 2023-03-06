@@ -1,8 +1,10 @@
-mkr gem 35 mA verbruik me lorawan
-ACS712 13mA
-Relais 4-Channel 6mA
-SG18B104K500CT en CC0603KRX7R9BB102 50 mA
-neo 6m 67mA
-INA219 10mA
-BH1750 7mA
-tot:238mA*60*60 = 856800mAh = 856,8Ah
+mkr gem 35 mA verbruik me lorawan x 5V			= 0.175W
+ACS712 13mA x 5V					= 0.065W
+Relais 4-Channel 6mA x 5V				= 0.03W
+SG18B104K500CT en CC0603KRX7R9BB102 50 mA x  6.3V	= 0.315W
+neo 6m 67mA x 5V					= 0.335W
+INA219 10mA x 5V					= 0.05W
+BH1750 7mA x 3.3V					= 0.0231W
+tot:238mA*60*60 = 856800mAh = 856,8Ah			= 1.3081W =
+
+voorbeeld: 2000 mAh /260 mA = 7.7 Hours
