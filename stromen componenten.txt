@@ -1,0 +1,8 @@
+mkr gem 35 mA verbruik me lorawan
+ACS712 13mA
+Relais 4-Channel 6mA
+SG18B104K500CT en CC0603KRX7R9BB102 50 mA
+neo 6m 67mA
+INA219 10mA
+BH1750 7mA
+tot:238mA*60*60 = 856800mAh = 856,8Ah
