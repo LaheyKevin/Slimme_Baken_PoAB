@@ -76,7 +76,7 @@ Schema verduidelijking:
 - De gele blok zet data om naar een downlink Object
 - De blauwe blokken zijn knoppen die data doorgeven
 
-![Node-RED applicatie](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/Node_red_app_send_debug.JPG)
+![Node-RED applicatie](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/Node_red_send_debug.JPG)
 
 ### LoRaWan data analyze
 Voor het verzenden van data over het LoRaWan netwerk is het de bedoeling dat deze berichten zo klein mogelijk zijn. In de code van het project stuur je zogezegd een string door, maar deze wordt geconverteerd naar bytes. Hierdoor moeten we aan de kant van ttn een payload formatter toevoegen die dit terug omzet. Ook hoe groter de string die we sturen hoe langer de "uplink" tijd zal zijn. Hierdoor hebben wij volgende keuzes gemaakt omtrent onze data.
