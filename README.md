@@ -125,6 +125,10 @@ In onderstaande lijst zijn alle componeten opgelijst die we nodig hebben voor de
 
 [Bestellijst V1 exel](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Materiaal/BestellijstV1.xlsx)
 
+## PCB
+1. Schema
+2. PCB
+
 ## Referentie links
 [FLWSB-SAMDaaNo21](https://github.com/DaanDekoningKrekels/FLWSB-SAMDaaNo21)
 
