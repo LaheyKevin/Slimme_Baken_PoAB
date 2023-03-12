@@ -104,11 +104,18 @@ Binnen LoRaWan bestaan er verschillende klassen. Elke klassen heeft verschillend
     
     ![Klasse B](https://www.thethingsnetwork.org/docs/lorawan/classes/class-b.png)
 3. Klasse C
-    - Klasse C is een verdere versie van klasse A doordat de recieve windows open blijven. Hierdoor is het mogelijk om naar het end device te sturen
+    - Klasse C is een verdere versie van klasse A doordat de recieve windows open blijven. Hierdoor is het mogelijk om naar het end device te sturen zonder dat deze eerst een uplink moet sturen.
     
     ![Klasse C](https://www.thethingsnetwork.org/docs/lorawan/classes/class-c.png)
-Klasse A = 0.025A
-Klasse C = 0.036A
+
+Vergelijking
+- Klasse B
+    - Deze klasse wordt niet ondersteund door de MKR WAN 1300. We gaan deze niet gebruiken
+- Klasse A vs C
+    - Klasse C laat ons toe om berichten te sturen vanuit node-red zonder dat de microcontroller eerst een uplink moet sturen. Het nadeel hiervan is dat klasse C een hoger verbruik heeft dan klasse a.
+    - Verbruik
+        - Klasse A = 0.025A
+        - Klasse B = 0.036A
 
 [TTN klassen](https://www.thethingsnetwork.org/docs/lorawan/classes/)
 
