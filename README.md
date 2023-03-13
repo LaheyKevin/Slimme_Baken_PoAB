@@ -119,6 +119,36 @@ Vergelijking
 
 [TTN klassen](https://www.thethingsnetwork.org/docs/lorawan/classes/)
 
+## Lampen aansturen
+
+### Onderzoek relais/ssr/mosfet
+Hier gaan we na welke component we het beste kunnen gebruiken voor het aansturen van de lampen.
+
+- Relais
+    - Een relais is een elektromagneetische schakelaar. Deze bestaat uit een spoel, het anker en een plaat ijzer dat wordt aangetrokken door de magneet.
+    ![Relais foto](https://media.digikey.com/Photos/Omron%20Elect%20Photos/G2R-1C.JPG)
+- SSR (solid state relais)
+    - Een SSR of halfgeleiderrerlais is principeel gezien geen relais want er zijn geef bewegende delen. Deze bestaat uit een interne led, fototransisor en transistor/scr/triac.
+    ![SSR foto](https://www.distrelec.be/Web/WebShopImages/landscape_large/72/80/D2425.jpg)
+- Mosfet
+    - De mosfet is een bepaald type veldeffecttransistor (FET). Deze bestaat uit verschillende lagen (metaal, oxide, semiconductor).
+    ![Mosfet foto](https://www.tutorialspoint.com/basic_electronics/images/mosfet.jpg)
+
+Vergelijking
+- Relais vs SSR
+    - Een relais maakt gebruik van mechanische contacten waardoor hier bewegende delen zijn en vonken kunnen onstaan. Bij een srr is dit een logische schakeling waardoor hier geen vonken of bewegende delen zijn. Hierdoor is de levensduur van de srr langer dan een relais.
+- SSR vs Mosfet
+    - Bij een mosfet moet er nog een extra weerstanden worden geplaats voor de aansturing ervan, dit is niet nodig bij een ssr.
+
+Besluit
+- We kienzen voor een SSR
+    - Dit doordat deze geen bewegende delen heeft en een relais wel. Ook moet hier minder extra componenten worden toegevoegd om deze aan te sturen.
+
+[Relais wiki](https://nl.wikipedia.org/wiki/Relais)
+
+[SSR wiki](https://nl.wikipedia.org/wiki/Halfgeleiderrelais)
+
+[Mosfet wiki](https://nl.wikipedia.org/wiki/MOSFET)
 
 ## Bestellijst
 In onderstaande lijst zijn alle componeten opgelijst die we nodig hebben voor de uitwerking van dit project. (V1 = enkel componenten die nodig zijn om de werking verder te onderzoeken, geen mechanische comonenten. Batterij kan worden besteld vanaf dat er een stroom analyze is gemaakt.) 
