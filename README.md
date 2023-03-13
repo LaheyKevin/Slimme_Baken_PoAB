@@ -126,13 +126,13 @@ Hier gaan we na welke component we het beste kunnen gebruiken voor het aansturen
 
 - Relais
     - Een relais is een elektromagneetische schakelaar. Deze bestaat uit een spoel, het anker en een plaat ijzer dat wordt aangetrokken door de magneet.
-    ![Relais foto](https://media.digikey.com/Photos/Omron%20Elect%20Photos/G2R-1C.JPG)
 - SSR (solid state relais)
     - Een SSR of halfgeleiderrerlais is principeel gezien geen relais want er zijn geef bewegende delen. Deze bestaat uit een interne led, fototransisor en transistor/scr/triac.
-    ![SSR foto](https://www.distrelec.be/Web/WebShopImages/landscape_large/72/80/D2425.jpg)
 - Mosfet
     - De mosfet is een bepaald type veldeffecttransistor (FET). Deze bestaat uit verschillende lagen (metaal, oxide, semiconductor).
-    ![Mosfet foto](https://www.tutorialspoint.com/basic_electronics/images/mosfet.jpg)
+    
+![Relais_SSR_Mosfet](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/Ssr_relais_mosfet.JPG)
+
 
 Vergelijking
 - Relais vs SSR
