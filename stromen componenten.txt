@@ -8,3 +8,4 @@ BH1750 7mA x 3.3V					= 0.0231W
 tot:238mA*60*60 = 856800mAh = 856,8Ah			= 1.3081W =
 
 voorbeeld: 2000 mAh /260 mA = 7.7 Hours
+238 * 24 = 5.712mAh
