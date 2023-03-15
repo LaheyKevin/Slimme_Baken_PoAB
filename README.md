@@ -104,19 +104,60 @@ Binnen LoRaWan bestaan er verschillende klassen. Elke klassen heeft verschillend
     
     ![Klasse B](https://www.thethingsnetwork.org/docs/lorawan/classes/class-b.png)
 3. Klasse C
-    - Klasse C is een verdere versie van klasse A doordat de recieve windows open blijven. Hierdoor is het mogelijk om naar het end device te sturen
+    - Klasse C is een verdere versie van klasse A doordat de recieve windows open blijven. Hierdoor is het mogelijk om naar het end device te sturen zonder dat deze eerst een uplink moet sturen.
     
     ![Klasse C](https://www.thethingsnetwork.org/docs/lorawan/classes/class-c.png)
-Klasse A = 0.025A
-Klasse C = 0.036A
+
+Vergelijking
+- Klasse B
+    - Deze klasse wordt niet ondersteund door de MKR WAN 1300. We gaan deze niet gebruiken
+- Klasse A vs C
+    - Klasse C laat ons toe om berichten te sturen vanuit node-red zonder dat de microcontroller eerst een uplink moet sturen. Het nadeel hiervan is dat klasse C een hoger verbruik heeft dan klasse a.
+    - Verbruik
+        - Klasse A = 0.025A
+        - Klasse B = 0.036A
 
 [TTN klassen](https://www.thethingsnetwork.org/docs/lorawan/classes/)
 
+## Lampen aansturen
+
+### Onderzoek relais/ssr/mosfet
+Hier gaan we na welke component we het beste kunnen gebruiken voor het aansturen van de lampen.
+
+- Relais
+    - Een relais is een elektromagneetische schakelaar. Deze bestaat uit een spoel, het anker en een plaat ijzer dat wordt aangetrokken door de magneet.
+- SSR (solid state relais)
+    - Een SSR of halfgeleiderrerlais is principeel gezien geen relais want er zijn geef bewegende delen. Deze bestaat uit een interne led, fototransisor en transistor/scr/triac.
+- Mosfet
+    - De mosfet is een bepaald type veldeffecttransistor (FET). Deze bestaat uit verschillende lagen (metaal, oxide, semiconductor).
+    
+![Relais_SSR_Mosfet](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/Ssr_relais_mosfet.JPG)
+
+
+Vergelijking
+- Relais vs SSR
+    - Een relais maakt gebruik van mechanische contacten waardoor hier bewegende delen zijn en vonken kunnen onstaan. Bij een srr is dit een logische schakeling waardoor hier geen vonken of bewegende delen zijn. Hierdoor is de levensduur van de srr langer dan een relais.
+- SSR vs Mosfet
+    - Bij een mosfet moet er nog een extra weerstanden worden geplaats voor de aansturing ervan, dit is niet nodig bij een ssr.
+
+Besluit
+- We kienzen voor een SSR
+    - Dit doordat deze geen bewegende delen heeft en een relais wel. Ook moet hier minder extra componenten worden toegevoegd om deze aan te sturen.
+
+[Relais wiki](https://nl.wikipedia.org/wiki/Relais)
+
+[SSR wiki](https://nl.wikipedia.org/wiki/Halfgeleiderrelais)
+
+[Mosfet wiki](https://nl.wikipedia.org/wiki/MOSFET)
 
 ## Bestellijst
 In onderstaande lijst zijn alle componeten opgelijst die we nodig hebben voor de uitwerking van dit project. (V1 = enkel componenten die nodig zijn om de werking verder te onderzoeken, geen mechanische comonenten. Batterij kan worden besteld vanaf dat er een stroom analyze is gemaakt.) 
 
 [Bestellijst V1 exel](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Materiaal/BestellijstV1.xlsx)
+
+## PCB
+1. Schema
+2. PCB
 
 ## Referentie links
 [FLWSB-SAMDaaNo21](https://github.com/DaanDekoningKrekels/FLWSB-SAMDaaNo21)
