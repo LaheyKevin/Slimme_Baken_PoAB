@@ -192,6 +192,11 @@ Met Node-red gaan we onze data visualiseren. Hieronder ziet u een voorbeeld van 
 
 [Node-red flow.json](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/LoRaWan/Node-red/flows.json)
 
+## Programma
+Het programma voor de arduino MKR WAN 1300
+
+[Arduino code](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/LoRaWan/Programma/Programma.ino)
+
 ## Lampen aansturen
 
 ### Onderzoek relais/ssr/mosfet
