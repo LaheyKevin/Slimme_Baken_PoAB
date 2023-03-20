@@ -93,6 +93,7 @@ Voor het verzenden van data over het LoRaWan netwerk is het de bedoeling dat dez
 Alle berichten die worden verzonden vanaf de microcontroller worden vooraf gegaan met een identiefier en hierna de mode. Hierdoor kan er een onderscheid worden gemaakt tussen de 3 soorten berichten.
 
 Voorbeeld berichten:
+
 0. DEVid:0
 1. DEVid:1:L1:L2:L3:Status
 2. DEVid:2:Lat:Lon
@@ -124,10 +125,17 @@ Vergelijking
 
 [TTN klassen](https://www.thethingsnetwork.org/docs/lorawan/classes/)
 
-### Node-red data ophalen/invoegen vanuit een DB
+### Node-red data ophalen/invoegen vanuit een database
 Om de data te kunnen opslaan gaan we dit doen met een SQL database. De database die we gebruiken vindt u hier:
 
-[Database bakens]()
+[Database bakens](https://github.com/LaheyKevin/Slimme_Baken_PoAB/tree/main/LoRaWan/Node-red/DB.sql)
+
+Doordat we verschillende data formaten doorsturen kunnen we dit opdelen in 3 gedeeltes.
+- Identifier toevoegen aan database
+    - Bij het opstarten van een baken zal er altijd een bericht worden gestuurd met de identiefier in. Hierop kan men ook zien als een baken niet opstart.
+    - '"INSERT INTO bakens (id, last_ms) VALUES ('" + id + "','" + Date.now() + "') ON DUPLICATE KEY UPDATE id='" + id + "',last_ms='" + Date.now() + "'"'
+- Data updaten in de database
+- GPS updaten in de database
 
 ## Lampen aansturen
 
