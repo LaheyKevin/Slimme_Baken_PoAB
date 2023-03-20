@@ -133,7 +133,7 @@ Om de data te kunnen opslaan gaan we dit doen met een SQL database. De database 
 Doordat we verschillende data formaten doorsturen kunnen we dit opdelen in 3 gedeeltes.
 - Identifier toevoegen aan database
     - Bij het opstarten van een baken zal er altijd een bericht worden gestuurd met de identiefier in. Hierop kan men ook zien als een baken niet opstart.
-    - '"INSERT INTO bakens (id, last_ms) VALUES ('" + id + "','" + Date.now() + "') ON DUPLICATE KEY UPDATE id='" + id + "',last_ms='" + Date.now() + "'"'
+    - `"INSERT INTO bakens (id, last_ms) VALUES ('" + id + "','" + Date.now() + "') ON DUPLICATE KEY UPDATE id='" + id + "',last_ms='" + Date.now() + "'"`
 - Data updaten in de database
 - GPS updaten in de database
 
