@@ -134,8 +134,28 @@ Doordat we verschillende data formaten doorsturen kunnen we dit opdelen in 3 ged
 - Identifier toevoegen aan database
     - Bij het opstarten van een baken zal er altijd een bericht worden gestuurd met de identiefier in. Hierop kan men ook zien als een baken niet opstart.
     - `"INSERT INTO bakens (id, last_ms) VALUES ('" + id + "','" + Date.now() + "') ON DUPLICATE KEY UPDATE id='" + id + "',last_ms='" + Date.now() + "'"`
+    - In bovestaande lijn zal er in de SQL database worden geken of er al een id bestaat. Als dit bestaat wordt deze geupdate met de huidige tijd anders wordt er een nieuw statement aangemaakt.
 - Data updaten in de database
+    - Dit wordt om een bepaalde tijd verstuurd. Dit bevat de data over de lampen en eventuele errors
+    - `"UPDATE bakens SET lamp1=" + L1 + ",lamp2=" + L2 + ",lamp3=" + L3 + ",status_code=" + Error + ",last_ms=" + Date.now() + " WHERE id='"+id+"'"`
+    - In bovestaande lijn zal er in de SQL databse de lijn worden geupdate waar het id = id.
 - GPS updaten in de database
+    - Aangezien de bakens op een statische plaats staan moet dit niet geupdate worden. We kiezen ervoor om dit toch elke dag te updaten.
+    - `"UPDATE bakens SET lat=" + Lat + ", lon=," + Lon + " last_ms=" + Date.now() + " WHERE id='" + id + "'"`
+    - In bovestaande lijn zal er in de SQL database de lijn worden geupdate waar het id = id.
+- ![Node-RED DB](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/DB_update.JPG)
+
+Data ophalen uit de database.
+- We halen alle data uit de tabel op
+    - `"SELECT * from bakens"`
+    - ![Node-RED DB](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/DB_get.JPG)
+
+### Node-red data weergeven vanuit de DB a.d.h.v. een dropdown
+Om de data die opgehaald is vanuit de database te visualiseren maken we gebruik van het node-red dashboard.
+
+We maken gebruik van een dropdown menu. Alle data die hieraan wordt meegegeven via "msg.options" zal een item voorstellen.
+- Omdat we enkel uit de id's willen kunnen kiezen van de bakens gaan we deze in een list plaatsen.
+    - `let ids = [];for (let i = 0; i < msg.payload.length; i++) {ids.push(msg.payload[i].id);}msg.options = ids;`
 
 ## Lampen aansturen
 
