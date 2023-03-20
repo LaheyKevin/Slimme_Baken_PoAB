@@ -183,7 +183,14 @@ Doordat we 3 leds hebben zouden we per situatie een ander getal kunnen doorsture
 
 - Node-red
     - We krijgen via LoRaWan nog steeds een int doorgestuurd. Deze zetten we om naar een binair getal waaruit we dan per karakter kunnen kijken of er iets mis is.
-    - ![Node-RED status](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/Error_code.JPG)
+    - ![Node-red status](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/Error_code.JPG)
+
+### Dashboard opstellen
+Met Node-red gaan we onze data visualiseren. Hieronder ziet u een voorbeeld van het huidig dashboard.
+
+![Node-red dashboard](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/Dashboard.JPG)
+
+[Node-red flow.json](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/LoRaWan/Node-red/flows.json)
 
 ## Lampen aansturen
 
