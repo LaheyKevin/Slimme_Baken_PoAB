@@ -81,16 +81,22 @@ Schema verduidelijking:
 ### LoRaWan data analyze
 Voor het verzenden van data over het LoRaWan netwerk is het de bedoeling dat deze berichten zo klein mogelijk zijn. In de code van het project stuur je zogezegd een string door, maar deze wordt geconverteerd naar bytes. Hierdoor moeten we aan de kant van ttn een payload formatter toevoegen die dit terug omzet. Ook hoe groter de string die we sturen hoe langer de "uplink" tijd zal zijn. Hierdoor hebben wij volgende keuzes gemaakt omtrent onze data.
 
-- Berichten opdelen in 3 delen vanaf de microcontroller
-    - Device id
+- Berichten opdelen in 3 mode's vanaf de microcontroller
+    - Device id:0
         - Bevat het id van de device. We sturen dit mee wanneer de microcontroller opstart zodat deze kan worden toegevoegd in een databank aan de ontvanger.
-    - Lamp data
+    - Lamp data:1
         - Bevat of de lampen aan of uit zijn.
         - Bevat foutmeldingen vanuit de baken.
-    - GPS locatie
+    - GPS locatie:2
         - De locatie waar de baken zich bevindt moet maar 1 keer worden doorgestuurd zodat er geen overload is.
 
-Alle berichten die worden verzonden vanaf de microcontroller worden vooraf gegaan met een identiefier. Hierdoor kan er een onderscheid worden gemaakt tussen de 3 soorten berichten.
+Alle berichten die worden verzonden vanaf de microcontroller worden vooraf gegaan met een identiefier en hierna de mode. Hierdoor kan er een onderscheid worden gemaakt tussen de 3 soorten berichten.
+
+Voorbeeld berichten:
+
+0. DEVid:0
+1. DEVid:1:L1:L2:L3:Status
+2. DEVid:2:Lat:Lon
 
 ### LoRaWan klassen analyze
 Binnen LoRaWan bestaan er verschillende klassen. Elke klassen heeft verschillende voordelen en nadelen, we overlopen de 3 klassen hieronder.
@@ -119,6 +125,78 @@ Vergelijking
 
 [TTN klassen](https://www.thethingsnetwork.org/docs/lorawan/classes/)
 
+### Node-red data ophalen/invoegen vanuit een database
+Om de data te kunnen opslaan gaan we dit doen met een SQL database. De database die we gebruiken vindt u hier:
+
+[Database bakens](https://github.com/LaheyKevin/Slimme_Baken_PoAB/tree/main/LoRaWan/Node-red/DB.sql)
+
+Doordat we verschillende data formaten doorsturen kunnen we dit opdelen in 3 gedeeltes.
+- Identifier toevoegen aan database
+    - Bij het opstarten van een baken zal er altijd een bericht worden gestuurd met de identiefier in. Hierop kan men ook zien als een baken niet opstart.
+    - `"INSERT INTO bakens (id, last_ms) VALUES ('" + id + "','" + Date.now() + "') ON DUPLICATE KEY UPDATE id='" + id + "',last_ms='" + Date.now() + "'"`
+    - In bovestaande lijn zal er in de SQL database worden geken of er al een id bestaat. Als dit bestaat wordt deze geupdate met de huidige tijd anders wordt er een nieuw statement aangemaakt.
+- Data updaten in de database
+    - Dit wordt om een bepaalde tijd verstuurd. Dit bevat de data over de lampen en eventuele errors
+    - `"UPDATE bakens SET lamp1=" + L1 + ",lamp2=" + L2 + ",lamp3=" + L3 + ",status_code=" + Error + ",last_ms=" + Date.now() + " WHERE id='"+id+"'"`
+    - In bovestaande lijn zal er in de SQL databse de lijn worden geupdate waar het id = id.
+- GPS updaten in de database
+    - Aangezien de bakens op een statische plaats staan moet dit niet geupdate worden. We kiezen ervoor om dit toch elke dag te updaten.
+    - `"UPDATE bakens SET lat=" + Lat + ", lon=," + Lon + " last_ms=" + Date.now() + " WHERE id='" + id + "'"`
+    - In bovestaande lijn zal er in de SQL database de lijn worden geupdate waar het id = id.
+- ![Node-RED DB](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/DB_update.JPG)
+
+Data ophalen uit de database.
+- We halen alle data uit de tabel op
+    - `"SELECT * from bakens"`
+    - ![Node-RED DB](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/DB_get.JPG)
+
+### Node-red data weergeven vanuit de DB a.d.h.v. een dropdown
+Om de data die opgehaald is vanuit de database te visualiseren maken we gebruik van het node-red dashboard.
+
+We maken gebruik van een dropdown menu. Alle data die hieraan wordt meegegeven via "msg.options" zal een item voorstellen.
+- Omdat we enkel uit de id's willen kunnen kiezen van de bakens gaan we deze in een list plaatsen.
+    - ![Node-RED dropdown](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/DB_dropdown_ids.JPG)
+    - We maken een variable waarin we alle id's toevoegen doordat we door de data loopen en elke keer het id eruit halen. Hierna voegen we ze toe aan de options key van het msg object.
+- Het dropdown menu geeft het gekozen id weer in "msg.payload". Hiermee kunnen we de aanvullende data uit de database halen.
+    - `"SELECT * FROM bakens WHERE id = '" + msg.payload + "'"`
+    - We selecteren de correcte rij uit de databse waarin het id overeenkomt met het gekozen id.
+- Als we de data hebben uit de DB kunnen we deze in text node's plaatsen zodat deze zichtbaar worden in het dashboard.
+    - `{{msg.payload[0].id}}`
+    - De bovenstaande lijn laat zien hoe we in een text node data uit de payload kunnen halen.
+
+- ![Node-RED dropdown](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/DB_dropdown.JPG)
+
+### Node-red status codes creëren
+Om aan te geven of de baken nog correct werkt zullen we gebruik maken van status codes.
+
+Doordat we 3 leds hebben zouden we per situatie een ander getal kunnen doorsturen. Maar als we gebruik maken van een binaire code die elke led voorstel gaat dit met één byte. Hierdoor moeten we ook minder data versturen over LoRaWan.
+
+- Een byte bestaat uit 4 bits: 0000
+    - De eerste 3 bits gebruiken we om de status van de lampen door te geven. 
+        - Als één van deze bits hoog is dan wilt dit zeggen dat deze baken niet brand.
+    - De laatste bit gebruiken we om aan te geven of er al een controle is uitgevoerd.
+        - Als dit 0 is wilt dit zeggen dat de baken nog geen controle heeft uitgevoerd.
+        - Als dit 1 is wilt dit zeggen dat de controle is uitgevoerd op de baken.
+    - Voorbeeld:
+        - 0000 = Er is nog geen controle uitgevoerd op de baken
+        - 1001 = De eerste lamp zal niet branden en er is een controle uitgevoerd
+
+- Node-red
+    - We krijgen via LoRaWan nog steeds een int doorgestuurd. Deze zetten we om naar een binair getal waaruit we dan per karakter kunnen kijken of er iets mis is.
+    - ![Node-red status](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/Error_code.JPG)
+
+### Dashboard opstellen
+Met Node-red gaan we onze data visualiseren. Hieronder ziet u een voorbeeld van het huidig dashboard.
+
+![Node-red dashboard](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/Dashboard.JPG)
+
+[Node-red flow.json](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/LoRaWan/Node-red/flows.json)
+
+## Programma
+Het programma voor de arduino MKR WAN 1300
+
+[Arduino code](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/LoRaWan/Programma/Programma.ino)
+
 ## Lampen aansturen
 
 ### Onderzoek relais/ssr/mosfet
@@ -132,7 +210,6 @@ Hier gaan we na welke component we het beste kunnen gebruiken voor het aansturen
     - De mosfet is een bepaald type veldeffecttransistor (FET). Deze bestaat uit verschillende lagen (metaal, oxide, semiconductor).
     
 ![Relais_SSR_Mosfet](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/Ssr_relais_mosfet.JPG)
-
 
 Vergelijking
 - Relais vs SSR
@@ -150,10 +227,16 @@ Besluit
 
 [Mosfet wiki](https://nl.wikipedia.org/wiki/MOSFET)
 
+### Aansutren SSR
+https://hydrosphere.co.uk/products/sabik-sc-110/
+https://octopart.com/lxm2-pl01-0000-lumileds-11546034?utm_source=google&utm_medium=cpc&utm_campaign=g_cpc_intl_search_performancemax_english_en_usd&gclid=Cj0KCQjwk7ugBhDIARIsAGuvgPYhbZd3LKjoZlZQ9cnGBASQgdLEpTC9dYHxNIW09sQW2HKVSXqPvgMaAmKREALw_wcB
+https://octopart.com/datasheet/lxm2-pl01-0000-lumileds-11546034
+
 ## Bestellijst
-In onderstaande lijst zijn alle componeten opgelijst die we nodig hebben voor de uitwerking van dit project. (V1 = enkel componenten die nodig zijn om de werking verder te onderzoeken, geen mechanische comonenten. Batterij kan worden besteld vanaf dat er een stroom analyze is gemaakt.) 
+In onderstaande lijst zijn alle componeten opgelijst die we nodig hebben voor de uitwerking van dit project. In de bestellijst V2 zitten alle componeten dubbel omdat dit voor 2 groepen is.
 
 [Bestellijst V1 exel](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Materiaal/BestellijstV1.xlsx)
+[Bestellijst V2 exel](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Materiaal/BestellijstV2.xlsx)
 
 ## PCB
 1. Schema
