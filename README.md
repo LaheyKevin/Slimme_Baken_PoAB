@@ -166,6 +166,25 @@ We maken gebruik van een dropdown menu. Alle data die hieraan wordt meegegeven v
 
 - ![Node-RED dropdown](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/DB_dropdown.JPG)
 
+### Node-red status codes creëren
+Om aan te geven of de baken nog correct werkt zullen we gebruik maken van status codes.
+
+Doordat we 3 leds hebben zouden we per situatie een ander getal kunnen doorsturen. Maar als we gebruik maken van een binaire code die elke led voorstel gaat dit met één byte. Hierdoor moeten we ook minder data versturen over LoRaWan.
+
+- Een byte bestaat uit 4 bits: 0000
+    - De eerste 3 bits gebruiken we om de status van de lampen door te geven. 
+        - Als één van deze bits hoog is dan wilt dit zeggen dat deze baken niet brand.
+    - De laatste bit gebruiken we om aan te geven of er al een controle is uitgevoerd.
+        - Als dit 0 is wilt dit zeggen dat de baken nog geen controle heeft uitgevoerd.
+        - Als dit 1 is wilt dit zeggen dat de controle is uitgevoerd op de baken.
+    - Voorbeeld:
+        - 0000 = Er is nog geen controle uitgevoerd op de baken
+        - 1001 = De eerste lamp zal niet branden en er is een controle uitgevoerd
+
+- Node-red
+    - We krijgen via LoRaWan nog steeds een int doorgestuurd. Deze zetten we om naar een binair getal waaruit we dan per karakter kunnen kijken of er iets mis is.
+    - ![Node-RED status](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/Error_code.JPG)
+
 ## Lampen aansturen
 
 ### Onderzoek relais/ssr/mosfet
