@@ -155,7 +155,8 @@ Om de data die opgehaald is vanuit de database te visualiseren maken we gebruik 
 
 We maken gebruik van een dropdown menu. Alle data die hieraan wordt meegegeven via "msg.options" zal een item voorstellen.
 - Omdat we enkel uit de id's willen kunnen kiezen van de bakens gaan we deze in een list plaatsen.
-    - `let ids = [];for (let i = 0; i < msg.payload.length; i++) {ids.push(msg.payload[i].id);}msg.options = ids;`
+    - `let ids = [];
+    for (let i = 0; i < msg.payload.length; i++) {ids.push(msg.payload[i].id);}msg.options = ids;`
 
 ## Lampen aansturen
 
