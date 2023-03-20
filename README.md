@@ -155,8 +155,16 @@ Om de data die opgehaald is vanuit de database te visualiseren maken we gebruik 
 
 We maken gebruik van een dropdown menu. Alle data die hieraan wordt meegegeven via "msg.options" zal een item voorstellen.
 - Omdat we enkel uit de id's willen kunnen kiezen van de bakens gaan we deze in een list plaatsen.
-    - `let ids = [];
-    for (let i = 0; i < msg.payload.length; i++) {ids.push(msg.payload[i].id);}msg.options = ids;`
+    - ![Node-RED dropdown](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/DB_dropdown_ids.JPG)
+    - We maken een variable waarin we alle id's toevoegen doordat we door de data loopen en elke keer het id eruit halen. Hierna voegen we ze toe aan de options key van het msg object.
+- Het dropdown menu geeft het gekozen id weer in "msg.payload". Hiermee kunnen we de aanvullende data uit de database halen.
+    - `"SELECT * FROM bakens WHERE id = '" + msg.payload + "'"`
+    - We selecteren de correcte rij uit de databse waarin het id overeenkomt met het gekozen id.
+- Als we de data hebben uit de DB kunnen we deze in text node's plaatsen zodat deze zichtbaar worden in het dashboard.
+    - `{{msg.payload[0].id}}`
+    - De bovenstaande lijn laat zien hoe we in een text node data uit de payload kunnen halen.
+
+- ![Node-RED dropdown](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/LoRaWan/DB_dropdown.JPG)
 
 ## Lampen aansturen
 
