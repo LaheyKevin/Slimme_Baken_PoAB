@@ -1,4 +1,18 @@
-20388336319223111
+20396739420329322
+ACS712ELCTR-05B-T
+SOIC127P600X175-8N
+
+
+0
+8
+8
+ARDUINO_MKR_WAN_1310
+BOARD_ARDUINO_MKR_WAN_1310
+
+
+0
+28
+28
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -2355,6 +2369,13 @@ Buzzer_Beeper
 Speaker_CUI_CMR-1206S-67
 Speaker, 30mW, 300-7000Hz, IP67 face, 12x6x2,25mm, https://www.cuidevices.com/product/resource/cmr-12062s-67.pdf
 speaker CUI
+0
+2
+2
+CC0603KRX7R9BB102
+CAPC1608X90
+<b>CAPACITOR</b>
+
 0
 2
 2
@@ -56573,6 +56594,13 @@ solder jumper open
 0
 5
 3
+L7805CV
+TO255P1040X460X1968-3
+
+
+0
+3
+3
 LED_SMD
 LED-APA102-2020
 http://www.led-color.com/upload/201604/APA102-2020%20SMD%20LED.pdf
@@ -75086,8 +75114,8 @@ AQY211EHAZ
 
 
 0
-0
-0
+4
+4
 Potentiometer_SMD
 Potentiometer_ACP_CA6-VSMD_Vertical
 Potentiometer, vertical, ACP CA6-VSMD, http://www.acptechnologies.com/wp-content/uploads/2017/06/01-ACP-CA6.pdf
@@ -80457,6 +80485,13 @@ Logo WEEE
 0
 0
 0
+TEMT6000X01
+TRANS_TEMT6000X01
+
+
+0
+3
+3
 TerminalBlock
 TerminalBlock_Altech_AK300-2_P5.00mm
 Altech AK300 terminal block, pitch 5.0mm, 45 degree angled, see http://www.mouser.com/ds/2/16/PCBMETRC-24178.pdf
