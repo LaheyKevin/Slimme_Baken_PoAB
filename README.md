@@ -243,6 +243,7 @@ Hoe library te gebruiken:
 1. Library defineren bovenaan de code
 
     `#include <Adafruit_INA219.h>`
+
     `Adafruit_INA219 ina219;`
 2. De sensor initialiseren in de setup
 
@@ -250,9 +251,13 @@ Hoe library te gebruiken:
 3. De waardes uitlezen in de loop
 
 `shuntvoltage = ina219.getShuntVoltage_mV();`
+
 `busvoltage = ina219.getBusVoltage_V();`
+
 `current_mA = ina219.getCurrent_mA();`
+
 `power_mW = ina219.getPower_mW();`
+
 `loadvoltage = busvoltage + (shuntvoltage / 1000);`
 4. Resultaat
 
