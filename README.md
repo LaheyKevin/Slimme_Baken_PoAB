@@ -250,15 +250,16 @@ Hoe library te gebruiken:
     `ina219.begin()`
 3. De waardes uitlezen in de loop
 
-`shuntvoltage = ina219.getShuntVoltage_mV();`
+    `shuntvoltage = ina219.getShuntVoltage_mV();`
 
-`busvoltage = ina219.getBusVoltage_V();`
+    `busvoltage = ina219.getBusVoltage_V();`
 
-`current_mA = ina219.getCurrent_mA();`
+    `current_mA = ina219.getCurrent_mA();`
 
-`power_mW = ina219.getPower_mW();`
+    `power_mW = ina219.getPower_mW();`
 
-`loadvoltage = busvoltage + (shuntvoltage / 1000);`
+    `loadvoltage = busvoltage + (shuntvoltage / 1000);`
+    
 4. Resultaat
 
 ![COM poort resultaat](https://www.electroniclinic.com/wp-content/uploads/2021/06/ina219-current-sensor-value-on-serial-monitor.jpg)
