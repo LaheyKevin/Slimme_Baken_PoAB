@@ -241,18 +241,22 @@ Met deze component gaan we de spanning en stroom meten over de gehele schakeling
 
 Hoe library te gebruiken:
 1. Library defineren bovenaan de code
+
     `#include <Adafruit_INA219.h>`
     `Adafruit_INA219 ina219;`
 2. De sensor initialiseren in de setup
+
     `ina219.begin()`
 3. De waardes uitlezen in de loop
-    `shuntvoltage = ina219.getShuntVoltage_mV();`
-    `busvoltage = ina219.getBusVoltage_V();`
-    `current_mA = ina219.getCurrent_mA();`
-    `power_mW = ina219.getPower_mW();`
-    `loadvoltage = busvoltage + (shuntvoltage / 1000);`
+
+`shuntvoltage = ina219.getShuntVoltage_mV();`
+`busvoltage = ina219.getBusVoltage_V();`
+`current_mA = ina219.getCurrent_mA();`
+`power_mW = ina219.getPower_mW();`
+`loadvoltage = busvoltage + (shuntvoltage / 1000);`
 4. Resultaat
-    ![COM poort resultaat](https://www.electroniclinic.com/wp-content/uploads/2021/06/ina219-current-sensor-value-on-serial-monitor.jpg)
+
+![COM poort resultaat](https://www.electroniclinic.com/wp-content/uploads/2021/06/ina219-current-sensor-value-on-serial-monitor.jpg)
 
 ![INA219 breakout bordje](https://m.media-amazon.com/images/I/61gSXe5TcVL._SL1010_.jpg)
 
