@@ -232,6 +232,40 @@ https://hydrosphere.co.uk/products/sabik-sc-110/
 https://octopart.com/lxm2-pl01-0000-lumileds-11546034?utm_source=google&utm_medium=cpc&utm_campaign=g_cpc_intl_search_performancemax_english_en_usd&gclid=Cj0KCQjwk7ugBhDIARIsAGuvgPYhbZd3LKjoZlZQ9cnGBASQgdLEpTC9dYHxNIW09sQW2HKVSXqPvgMaAmKREALw_wcB
 https://octopart.com/datasheet/lxm2-pl01-0000-lumileds-11546034
 
+## Metingen die uitgevoerd worden
+
+### Stroom meting ACS712
+
+### Spanning/stroom meting INA219
+Met deze component gaan we de spanning en stroom meten over de gehele schakeling. Het bordje beschikt over I2C communicatie waarmee de MKR WAN 1300 kan comuniceren. Om de component uit te lezen maken we gebruik van de [Adafruit_INA219](https://github.com/adafruit/Adafruit_INA219) library. Deze library laat ons toe om snel data op te halen vanuit de sensor.
+
+Hoe library te gebruiken:
+1. Library defineren bovenaan de code
+
+    `#include <Adafruit_INA219.h>`
+
+    `Adafruit_INA219 ina219;`
+2. De sensor initialiseren in de setup
+
+    `ina219.begin()`
+3. De waardes uitlezen in de loop
+
+    `shuntvoltage = ina219.getShuntVoltage_mV();`
+
+    `busvoltage = ina219.getBusVoltage_V();`
+
+    `current_mA = ina219.getCurrent_mA();`
+
+    `power_mW = ina219.getPower_mW();`
+
+    `loadvoltage = busvoltage + (shuntvoltage / 1000);`
+    
+4. Resultaat
+
+![COM poort resultaat](https://www.electroniclinic.com/wp-content/uploads/2021/06/ina219-current-sensor-value-on-serial-monitor.jpg)
+
+![INA219 breakout bordje](https://m.media-amazon.com/images/I/61gSXe5TcVL._SL1010_.jpg)
+
 ## Bestellijst
 In onderstaande lijst zijn alle componeten opgelijst die we nodig hebben voor de uitwerking van dit project. In de bestellijst V2 zitten alle componeten dubbel omdat dit voor 2 groepen is.
 

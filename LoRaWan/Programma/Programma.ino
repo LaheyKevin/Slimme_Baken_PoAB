@@ -17,7 +17,7 @@ int outsideLightIntensity = 750;
 bool updateLeds = false;
 bool leds = false;
 
-unsigned long sendOnTime;
+unsigned long sendOnTime = 0;
 unsigned long sendInterval = 5000;
 
 byte error = 0;
@@ -58,7 +58,7 @@ void setup() {
   int err1;
   modem.setPort(1);
   modem.beginPacket();
-  modem.print(modem.deviceEUI()+":0");  //modem.deviceEUI()
+  modem.print(modem.deviceEUI() + ":0"); //modem.deviceEUI()
   err1 = modem.endPacket(true);
   if (err1 > 0) {
     Serial.println("Bericht verzonden");
@@ -95,7 +95,7 @@ void loop() {
       changeLedState(true);
     } else if (message == "L0") {
       changeLedState(false);
-      sendLoRaMessage(modem.deviceEUI()+":1:0:0:0:" + 0b0001);
+      sendLoRaMessage(modem.deviceEUI() + ":1:0:0:0:" + 0b0001);
     }
   }
 
@@ -107,10 +107,10 @@ void loop() {
   //  sendLoRaMessage("3:51.2304.418");
   //}
 
-  // if (millis() - sendInterval > sendOnTime) {
-  //  sendOnTime = millis();
-  // Serial.println("5 min gepaseerd");
-  //}
+  if (sendOnTime + sendInterval >= millis()) {
+    sendOnTime = millis();
+    Serial.println("5 min gepaseerd");
+  }
 
   delay(1000);
 }
@@ -171,7 +171,7 @@ void checkLights(bool test) {
     } else {
       error &= ~(1 << 3);
     }
-    sendLoRaMessage(modem.deviceEUI()+":1:1:1:1:" + error);
+    sendLoRaMessage(modem.deviceEUI() + ":1:1:1:1:" + error);
   }
 
   //sendLoRaMessage(modem.deviceEUI() + ":2:51.23:4.418");
