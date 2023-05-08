@@ -38,7 +38,7 @@ void loop(void)
   float power_mW = 0;
   float capacity = 0;
 
-  int batAh = 0.2;
+  float batAh = 0.20;
 
   shuntvoltage = ina219.getShuntVoltage_mV();
   busvoltage = ina219.getBusVoltage_V();
