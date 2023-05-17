@@ -4,6 +4,13 @@
 
   (paper "A4")
 
+  (title_block
+    (title "POAB_Baseplate")
+    (date "2023-05-16")
+    (rev "2.0")
+    (comment 2 "Quinten Moons & Kevin Lahey")
+  )
+
   (lib_symbols
     (symbol "ACS712ELCTR-05B-T:ACS712ELCTR-05B-T" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
       (property "Reference" "U" (id 0) (at -12.7 13.7 0)
