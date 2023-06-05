@@ -1,7 +1,9 @@
-#include <Wire.h>
-#include <Adafruit_INA219.h>
 
-Adafruit_INA219 ina219;
+
+#include <Wire.h>
+#include <INA219.h>
+
+INA219 ina219;
 
 
 void setup(void) 

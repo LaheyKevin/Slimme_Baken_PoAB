@@ -227,7 +227,26 @@ Besluit
 
 [Mosfet wiki](https://nl.wikipedia.org/wiki/MOSFET)
 
-### Aansutren SSR
+### Aansturen verbruiker
+De module die we gaan aansturen is de [AQY211EHAZ](https://be.farnell.com/panasonic/aqy211ehaz/mosfet-relay-spst-1a-30v-dip-4/dp/3881433). Deze kan worden aangestuurd door onze µC en laat hoge stromen door. 
+
+![Schema AQY](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Pictures/AQY.JPG)
+
+Pinout:
+1. Led input
+2. Led output
+3. Vermogen input
+4. Vermogen output
+
+De led kan maximaal 50mA aan en een reverse voltage van 5V. De vermogen uitgang kan 30V en 1A aan.
+
+Berekening voor de weerstand van da ding
+3.3V
+Typical 1.2mA-3mA
+
+2.21mA met 1K
+3.18mA met 680
+
 https://hydrosphere.co.uk/products/sabik-sc-110/
 https://octopart.com/lxm2-pl01-0000-lumileds-11546034?utm_source=google&utm_medium=cpc&utm_campaign=g_cpc_intl_search_performancemax_english_en_usd&gclid=Cj0KCQjwk7ugBhDIARIsAGuvgPYhbZd3LKjoZlZQ9cnGBASQgdLEpTC9dYHxNIW09sQW2HKVSXqPvgMaAmKREALw_wcB
 https://octopart.com/datasheet/lxm2-pl01-0000-lumileds-11546034
@@ -271,6 +290,18 @@ In onderstaande lijst zijn alle componeten opgelijst die we nodig hebben voor de
 
 [Bestellijst V1 exel](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Materiaal/BestellijstV1.xlsx)
 [Bestellijst V2 exel](https://github.com/LaheyKevin/Slimme_Baken_PoAB/blob/main/Materiaal/BestellijstV2.xlsx)
+
+### Connectoren
+IP 68, connectoren om de bak te verbinden met de lampen. Ze verschillen in diameter. Connectie stukken staat in vaak samen gekocht:
+tabel met specificaties moet hier komen enzo
+
+1. https://www.conrad.be/nl/p/weipu-sp2110-p-2-i-ronde-connector-stekker-recht-serie-ronde-connectors-sp21-totaal-aantal-polen-2-1-stuk-s-736559.html
+2. https://www.conrad.be/nl/p/weipu-sp2112-s-2-ronde-connector-bus-inbouw-serie-ronde-connectors-sp21-totaal-aantal-polen-2-1-stuk-s-738454.html
+
+https://www.visser-assen.nl/blog-en-nieuws/aantal-amperes-en-draaddikte-van-krachtstroomkabels
+
+
+https://datasheetspdf.com/datasheet/AQY211EHAZ.html
 
 ## PCB
 1. Schema

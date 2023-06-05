@@ -17,8 +17,8 @@ int outsideLightIntensity = 750;
 bool updateLeds = false;
 bool leds = false;
 
-unsigned long sendOnTime = 0;
-unsigned long sendInterval = 5000;
+//unsigned long sendOnTime = 0;
+//unsigned long sendInterval = 5000;
 
 byte error = 0;
 
@@ -37,10 +37,12 @@ void setup() {
   pinMode(0, OUTPUT); //Led1
   pinMode(1, OUTPUT); //Led2
   pinMode(2, OUTPUT); //Led3
+  pinMode(6, OUTPUT); //BUILD IN LED
 
   //LoRaWan
   if (!modem.begin(EU868)) {
     Serial.println("Failed to start module");
+    digitalWrite(6, HIGH);
     while (1) {}
   };
   Serial.println("Module gestart");
@@ -49,22 +51,12 @@ void setup() {
   int connected = modem.joinOTAA(SECRET_APP_EUI, SECRET_APP_KEY);
   if (!connected) {
     Serial.println("FOUT, geen verbinding, start opnieuw op");
+    digitalWrite(6, HIGH);
     while (1) {}
   }
   modem.minPollInterval(60);
 
   delay(5000);
-  //Startup message
-  int err1;
-  modem.setPort(1);
-  modem.beginPacket();
-  modem.print(modem.deviceEUI() + ":0"); //modem.deviceEUI()
-  err1 = modem.endPacket(true);
-  if (err1 > 0) {
-    Serial.println("Bericht verzonden");
-  } else {
-    Serial.println("Bericht niet verzonden");
-  }
 }
 
 void loop() {
@@ -93,9 +85,10 @@ void loop() {
 
     if (message == "L1") {
       changeLedState(true);
+      sendLoRaMessage("1:1:1:1:0001");
     } else if (message == "L0") {
       changeLedState(false);
-      sendLoRaMessage(modem.deviceEUI() + ":1:0:0:0:" + 0b0001);
+      sendLoRaMessage("1:0:0:0:0001");
     }
   }
 
@@ -103,14 +96,10 @@ void loop() {
     error = 1;
   }
 
-  //if (digitalRead(7)) {
-  //  sendLoRaMessage("3:51.2304.418");
+  //if (sendOnTime + sendInterval >= millis()) {
+  //  sendOnTime = millis();
+  //  Serial.println("5 min gepaseerd");
   //}
-
-  if (sendOnTime + sendInterval >= millis()) {
-    sendOnTime = millis();
-    Serial.println("5 min gepaseerd");
-  }
 
   delay(1000);
 }
@@ -139,11 +128,10 @@ void changeLedState(bool state) { //Function to turn on leds
 }
 
 void sendLoRaMessage(String data) { //Function to send data over LoRa
-  int err;
   modem.setPort(1);
   modem.beginPacket();
   modem.print(data);
-  err = modem.endPacket(true);
+  int err = modem.endPacket(true);
   if (err > 0) {
     Serial.println("Bericht verzonden");
   } else {
@@ -171,8 +159,8 @@ void checkLights(bool test) {
     } else {
       error &= ~(1 << 3);
     }
-    sendLoRaMessage(modem.deviceEUI() + ":1:1:1:1:" + error);
+    sendLoRaMessage("1:1:1:1:" + String(error));
   }
 
-  //sendLoRaMessage(modem.deviceEUI() + ":2:51.23:4.418");
+  //sendLoRaMessage("2:51.23:4.418");
 }

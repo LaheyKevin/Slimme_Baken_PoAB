@@ -17,5 +17,5 @@ void loop() {
   float f = ADS.toVoltage(2);
 
   Serial.print("Analog0: "); Serial.print(ADC0); Serial.print('\t'); Serial.println(ADC0 * f, 3);
-  delay(2000);
+  delay(100);
 }

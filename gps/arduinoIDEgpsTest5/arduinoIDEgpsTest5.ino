@@ -26,7 +26,7 @@ void loop() {
 
 void displayInfo()
 {
-  if(millis() - start > 5000) {
+  if (millis() - start > 5000) {
     Serial.print(F("Location: "));
     if (gps.location.isValid()) {
       Serial.print("Lat: ");
