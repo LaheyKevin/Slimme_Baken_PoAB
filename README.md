@@ -2,7 +2,7 @@
 
 ## Documentatie
 
-Beste lezer van dit document u kan de documentatie vinden door op volgende link te drukken. ![documentatie baken]()
+Beste lezer van dit document u kan de documentatie vinden door op volgende link te drukken. ![documentatie baken]() (8-6-2023 wordt deze toegevoed staat nog in teams)
 
 ## Deelnemers
 
